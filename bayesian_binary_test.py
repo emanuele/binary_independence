@@ -1,6 +1,6 @@
 """
-Computation of the poserior probabilities of H_1 (independence) and
-H_2 (dependence) about a given confusion matrix (N).
+Computation of the poserior probabilities of H1 (independence) and
+H2 (dependence) about a given confusion matrix (N).
 """
 
 from scipy.special import gammaln
@@ -73,9 +73,9 @@ def compute_posteriors(N, p_H1=0.5, p_H2=0.5, alpha=1, beta=1, alpha_1=1, beta_1
     """
     p_N_given_H2 = compute_likelihood_H2(N, alpha_1=alpha_1, beta_1=beta_1, alpha_2=alpha_2, beta_2=beta_2)
     p_N_given_H1 = compute_likelihood_H1(N, alpha=alpha, beta=beta)    
-    p_H_2_given_N = (p_N_given_H2 * p_H2)/((p_N_given_H1 * p_H1)+(p_N_given_H2 * p_H2))
-    p_H_1_given_N = 1 - p_H_2_given_N
-    return p_H_1_given_N, p_H_2_given_N
+    p_H2_given_N = (p_N_given_H2 * p_H2)/((p_N_given_H1 * p_H1)+(p_N_given_H2 * p_H2))
+    p_H1_given_N = 1 - p_H2_given_N
+    return p_H1_given_N, p_H2_given_N
 
 
 if __name__ == '__main__':
@@ -83,12 +83,12 @@ if __name__ == '__main__':
     N = np.array([[ 1,  1],
                   [ 1,  1]])
 
-    p_H_1_given_N , p_H_2_given_N = compute_posteriors(N)
+    p_H1_given_N , p_H2_given_N = compute_posteriors(N)
 
     print "Confusion matrix:"
     print N
-    print "p(H_1|N) =", p_H_1_given_N
-    print "p(H_2|N) =", p_H_2_given_N
+    print "p(H1|N) =", p_H1_given_N
+    print "p(H2|N) =", p_H2_given_N
     
     
 
